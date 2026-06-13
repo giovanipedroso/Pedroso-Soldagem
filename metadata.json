@@ -1,0 +1,6 @@
+{
+  "name": "Gestor de Soldagem",
+  "description": "Sistema de gestão completo para oficinas de soldagem: controle de clientes, orçamentos, estoque de materiais e status de serviços.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

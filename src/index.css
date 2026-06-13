@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  background-color: #08090d;
+  color: #f1f5f9;
+  font-family: var(--font-sans);
+}
+
+/* Custom gorgeous scrollbar for sophisticated dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090a10;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2235;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide everything except the printable sheet */
+  .print\:hidden, 
+  header, 
+  aside,
+  button,
+  input,
+  select,
+  .rounded-xl {
+    display: none !important;
+  }
+
+  .printable-paper {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}

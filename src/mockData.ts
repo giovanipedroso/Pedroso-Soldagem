@@ -1,0 +1,203 @@
+import { Customer, Material, Budget, ServiceOrder } from './types';
+
+export const INITIAL_CUSTOMERS: Customer[] = [
+  {
+    id: 'cust-1',
+    name: 'Metalúrgica Ferro Forte',
+    document: '12.345.678/0001-99',
+    phone: '(11) 98765-4321',
+    email: 'contato@ferroforte.com.br',
+    address: 'Av. Industrial, 1500 - Galpão B, São Paulo - SP',
+    createdAt: '2026-05-10',
+  },
+  {
+    id: 'cust-2',
+    name: 'Roberto Mendonça de Souza',
+    document: '123.456.789-00',
+    phone: '(21) 99888-1122',
+    email: 'roberto.mendonca@gmail.com',
+    address: 'Rua das Flores, 45 - Casa 2, Rio de Janeiro - RJ',
+    createdAt: '2026-05-28',
+  },
+  {
+    id: 'cust-3',
+    name: 'Construtora Aliança Ltda',
+    document: '98.765.432/0001-11',
+    phone: '(31) 3456-7890',
+    email: 'suprimentos@alianca.eng.br',
+    address: 'Rua Maranhão, 201 - Oficinas, Belo Horizonte - MG',
+    createdAt: '2026-06-01',
+  },
+];
+
+export const INITIAL_MATERIALS: Material[] = [
+  {
+    id: 'mat-1',
+    name: 'Eletrodo Revestido OK 46.00 E6013 - 2.50mm',
+    type: 'eletrodos',
+    quantity: 15.5,
+    unit: 'kg',
+    unitPrice: 28.50,
+    minQuantity: 5.0,
+    supplier: 'Esab Distribuidora',
+  },
+  {
+    id: 'mat-2',
+    name: 'Arame de Solda MIG ER70S-6 - 1.0mm',
+    type: 'arames_mig',
+    quantity: 3, // reels
+    unit: 'bobina (15kg)',
+    unitPrice: 295.00,
+    minQuantity: 2,
+    supplier: 'MIG/TIG Soldas Inc',
+  },
+  {
+    id: 'mat-3',
+    name: 'Gás de Proteção Argônio Puro (Cilindro de 50L)',
+    type: 'gases',
+    quantity: 1.2,
+    unit: 'cilindro',
+    unitPrice: 420.00,
+    minQuantity: 1.0,
+    supplier: 'Air Liquide Brasil',
+  },
+  {
+    id: 'mat-4',
+    name: 'Gás de Proteção Atmosfera Ativa (Mistura CO2/Argônio)',
+    type: 'gases',
+    quantity: 2.0,
+    unit: 'cilindro',
+    unitPrice: 380.00,
+    minQuantity: 1.0,
+    supplier: 'Air Liquide Brasil',
+  },
+  {
+    id: 'mat-5',
+    name: 'Chapa de Aço Carbono ASTM A36 - 1/4" (1.20m x 2.40m)',
+    type: 'chapas_perfis',
+    quantity: 8,
+    unit: 'unidade',
+    unitPrice: 480.00,
+    minQuantity: 3.0,
+    supplier: 'Gerdau Comercial',
+  },
+  {
+    id: 'mat-6',
+    name: 'Disco de Corte Abrasivo 4.1/2" x 1.0mm',
+    type: 'abrasivos',
+    quantity: 45,
+    unit: 'unidade',
+    unitPrice: 6.80,
+    minQuantity: 20.0,
+    supplier: 'Norton Abrasivos',
+  },
+];
+
+export const INITIAL_BUDGETS: Budget[] = [
+  {
+    id: 'bud-1',
+    customerId: 'cust-1',
+    title: 'Fabricação de Estrutura de Suporte Metálico',
+    description: 'Confecção de 4 pórticos de sustentação pesada sob medida, com esquadrejamento, solda MIG contínua em ângulo e acabamento antiferruginoso.',
+    items: [
+      {
+        id: 'bi-1',
+        description: 'Chapa de Aço Carbono ASTM A36 - 1/4" para as bases',
+        quantity: 2,
+        unitPrice: 480.00,
+        totalPrice: 960.00,
+      },
+      {
+        id: 'bi-2',
+        description: 'Arame de Solda MIG + Gás de proteção utilizado',
+        quantity: 1,
+        unitPrice: 180.00,
+        totalPrice: 180.00,
+      },
+      {
+        id: 'bi-3',
+        description: 'Consumíveis/Discos e miscelâneas de fixação',
+        quantity: 1,
+        unitPrice: 90.00,
+        totalPrice: 90.00,
+      },
+    ],
+    laborCost: 1500.00,
+    marginPercent: 30, // 30% lucro sobre a soma de materiais e mão de obra
+    discount: 100.00,
+    total: 3447.00, // ((960+180+90) + 1500) * 1.30 - 100 = 2730 * 1.3 - 100 = 3549 - 100 = 3449
+    status: 'aprovado',
+    validUntil: '2026-07-15',
+    createdAt: '2026-06-01',
+  },
+  {
+    id: 'bud-2',
+    customerId: 'cust-2',
+    title: 'Restauração de Portão Residencial Ornamentado',
+    description: 'Substituição das bases corrompidas por ferrugem, soldagem de novas dobradiças reforçadas com eletrodo E6013 e acabamento esmerilhado.',
+    items: [
+      {
+        id: 'bi-4',
+        description: 'Perfil Metalon de Ferro G01 - 40x40',
+        quantity: 2,
+        unitPrice: 85.00,
+        totalPrice: 170.00,
+      },
+      {
+        id: 'bi-5',
+        description: 'KG de Eletrodos E6013 e Discos de Desbaste',
+        quantity: 3,
+        unitPrice: 35.00,
+        totalPrice: 105.00,
+      },
+    ],
+    laborCost: 450.00,
+    marginPercent: 20,
+    discount: 0,
+    total: 870.00, // ((170+105) + 450) * 1.20 = 725 * 1.20 = 870
+    status: 'pendente',
+    validUntil: '2026-06-30',
+    createdAt: '2026-06-10',
+  },
+];
+
+export const INITIAL_SERVICES: ServiceOrder[] = [
+  {
+    id: 'so-1',
+    budgetId: 'bud-1',
+    customerId: 'cust-1',
+    title: 'Estrutura de Suporte Metálico - Metalúrgica Ferro Forte',
+    description: 'Confecção de 4 pórticos de sustentação industrial sob medida com soldas de alta penetração em passe duplo.',
+    status: 'em_progresso',
+    priority: 'alta',
+    startDate: '2026-06-03',
+    totalValue: 3447.00,
+    paymentStatus: 'pendente',
+    notes: 'Soldador escalado: Anderson. Ensaios visuais de solda solicitados na entrega.',
+  },
+  {
+    id: 'so-2',
+    customerId: 'cust-3',
+    title: 'Soldagem de Reforço em Vigas I (Obra Aliança)',
+    description: 'Soldagem in loco de chapas de reforço (enrijecedores) nas almas das vigas de transição metálicas do 3º pavimento.',
+    status: 'fila',
+    priority: 'alta',
+    startDate: '2026-06-15',
+    totalValue: 6500.00,
+    paymentStatus: 'pago', // Adiantamento integral recebido
+    notes: 'Exige equipamento móvel de solda a diesel e eletrodos básicos E7018 ressecados na estufa regulada.',
+  },
+  {
+    id: 'so-3',
+    customerId: 'cust-2',
+    title: 'Grelhas de Escoamento sob medida',
+    description: 'Confecção de 2 grelhas de captação pluvial em ferro chato soldado com bocal direcionador.',
+    status: 'concluido',
+    priority: 'baixa',
+    startDate: '2026-06-05',
+    endDate: '2026-06-08',
+    totalValue: 680.00,
+    paymentStatus: 'pago',
+    notes: 'Cliente já retirou o material na oficina e ficou satisfeito.',
+  },
+];
